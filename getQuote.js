@@ -9,7 +9,7 @@ export async function getQuote() {
         blockquote.textContent = `" Sorry, Quote service is down "`;
     figcaption.textContent = `- code author`;
     } else {
-    console.log(data)
+    // console.log(data)
     blockquote.textContent = `" ${ data.data[0].quoteText } "`;
     figcaption.textContent = `- ${ data.data[0].quoteAuthor }`;}
 };

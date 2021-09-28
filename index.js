@@ -92,7 +92,7 @@ function showDate() {
 function getImageNext() {
     if (carusel < bckgrndArr.length - 1) { carusel++ } else { carusel = 0 }
     let src = url + bckgrndArr[carusel];
-    console.log(carusel)
+    // console.log(carusel)
     img.src = src;
     img.onload = () => { body.style.backgroundImage = `url(${src})`; };
 }

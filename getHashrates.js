@@ -34,7 +34,7 @@ export default async function getHashrates() {
 
 	const res = await fetch(btczUrl);
     const data = await res.json();
-    console.log(data)
+    // console.log(data)
     if (!data) {
         hashrateCurrent.textContent = "Sorry, pool is down";
         hashrate.textContent = ' :-( ';
