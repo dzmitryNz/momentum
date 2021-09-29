@@ -2,6 +2,7 @@
 // import setChart from './chart2';
 import { getQuote } from './getQuote.js';
 import getHashrates from './getHashrates.js';
+import { ru, en } from './dict.js';
 
 const time = document.querySelector('.time'),
     next = document.querySelector('.next'),
@@ -24,11 +25,12 @@ const time = document.querySelector('.time'),
     url = './assets/images/';
     
     let bckgrndArr = [],
-    defName = 'Your name here',
-    defFocus = 'Here is the important thing',
-    defCity = 'Belarus',
-    carusel = 0,
-    styleNew = 'color: lightgray; text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0';
+        language = en,
+        defName = language.name,
+        defFocus = language.focus,
+        defCity = language.city,
+        styleNew = 'color: lightgray; text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0',
+        carusel = 0;
 
     function bckgrGrUpd() {
         let m = ['night/', 'morning/', 'day/', 'evening/'],
@@ -78,8 +80,8 @@ function addZero(n) {
 }
 
 function showDate() {
-    const daysEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const daysEn = language.weekdays;
+    const monthsEn = language.months;
     let tdy = new Date(),
         day = daysEn[tdy.getDay()],
         date = tdy.getDate(),
@@ -187,8 +189,8 @@ async function getWeather() {
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     temperature.textContent = `${data.main.temp}°C`;
     weatherDescription.textContent = data.weather[0].description;
-    humidity.textContent = `humidity: ${data.main.humidity}%`;
-    wind.textContent = `wind speed: ${data.wind.speed}m/s`;
+    humidity.textContent = `${language.humidity}: ${data.main.humidity}%`;
+    wind.textContent = `${language.wind}: ${data.wind.speed}m/s`;
 
     setTimeout(getWeather, 6000000);
 }
