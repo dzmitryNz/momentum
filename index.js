@@ -2,6 +2,7 @@
 // import setChart from './chart2';
 import { getQuote } from './getQuote.js';
 import getHashrates from './getHashrates.js';
+import getWeather from './getWeather.js';
 import { ru, en } from './dict.js';
 
 const time = document.querySelector('.time'),
@@ -16,11 +17,6 @@ const time = document.querySelector('.time'),
     name = document.querySelector('.name'),
     prev = document.querySelector('.prev'),
     focus = document.querySelector('.focus'),
-    weatherIcon = document.querySelector('.weather-icon'),
-    temperature = document.querySelector('.temperature'),
-    weatherDescription = document.querySelector('.weather-description'),
-    humidity = document.querySelector('.humidity'),
-    wind = document.querySelector('.wind'),
     city = document.querySelector('.city'),
     url = './assets/images/';
     
@@ -91,17 +87,16 @@ function showDate() {
     dateLine.innerHTML = `${day}<span> - </span>${date}<span> </span>${month}<span> </span>${year}`;
 }
 
-function getImageNext() {
-    if (carusel < bckgrndArr.length - 1) { carusel++ } else { carusel = 0 }
-    let src = url + bckgrndArr[carusel];
-    // console.log(carusel)
-    img.src = src;
-    img.onload = () => { body.style.backgroundImage = `url(${src})`; };
-}
-
-function getImagePrev() {
-    if (carusel > 0) { carusel-- } else { carusel = 23 }
-    console.log(carusel)
+function getImage(how) {
+  console.log(how)
+    if(how === "next") {
+      if (carusel < bckgrndArr.length - 1) carusel++; 
+        else carusel = 0;
+    }
+    if(how === "prev") {
+      if (carusel > 0) carusel--;
+        else carusel = 23;
+    }
     let src = url + bckgrndArr[carusel];
     img.src = src;
     img.onload = () => { body.style.backgroundImage = `url(${src})`; };
@@ -172,29 +167,6 @@ function getCity() {
     }
 }
 
-async function getWeather() {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${defCity}&lang=en&appid=351bef36095247499eb96265dfb607d2&units=metric`;
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data.cod !== 200) {
-        alert(`Ошибка ${data.cod} \n ${data.message}!`);
-        weatherIcon.textContent = '';
-        temperature.textContent = 'No Data';
-        weatherDescription.textContent = '';
-        humidity.textContent = 'No Data';
-        wind.textContent = '';
-        console.log(data)
-        return
-    }
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    temperature.textContent = `${data.main.temp}°C`;
-    weatherDescription.textContent = data.weather[0].description;
-    humidity.textContent = `${language.humidity}: ${data.main.humidity}%`;
-    wind.textContent = `${language.wind}: ${data.wind.speed}m/s`;
-
-    setTimeout(getWeather, 6000000);
-}
-
 function setCity(e) {
     if (e.type === 'click') { city.textContent = '' }
     if (e.type === 'keypress') {
@@ -202,7 +174,7 @@ function setCity(e) {
             localStorage.setItem('city', e.target.innerText);
             city.blur();
             getCity();
-            getWeather();
+            getWeather(defCity);
         }
     } else { localStorage.setItem('city', e.target.innerText); }
     if (e.type === 'blur') {
@@ -219,8 +191,8 @@ function setCity(e) {
 
 btn.addEventListener('click', getQuote);
 
-prev.addEventListener('click', getImagePrev);
-next.addEventListener('click', getImageNext);
+prev.addEventListener('click', () => getImage("prev"));
+next.addEventListener('click', () => getImage("next"));
 
 name.addEventListener('click', setName);
 name.addEventListener('keypress', setName);
@@ -234,7 +206,7 @@ city.addEventListener('click', setCity);
 city.addEventListener('keypress', setCity);
 city.addEventListener('blur', setCity);
 
-// imgbtn.addEventListener('click', getImageNext);
+// imgbtn.addEventListener('click', () => getImage("next"));
 
 bgrChng();
 showTime();
@@ -242,7 +214,7 @@ showDate();
 getName();
 getFocus();
 getCity();
-getWeather();
+getWeather(defCity);
 getHashrates();
 getQuote();
 // document.addEventListener('DOMContentLoaded', getQuote);
