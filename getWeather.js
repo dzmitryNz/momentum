@@ -4,10 +4,11 @@ const weatherIcon = document.querySelector('.weather-icon'),
     weatherDescription = document.querySelector('.weather-description'),
     humidity = document.querySelector('.humidity'),
     wind = document.querySelector('.wind'),
-    id = "yourIdHere";
+    owm_id = "Your_ID_Here";
+
 export default async function getWeather(defCity) {
   let language = en;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${defCity}&lang=en&appid=${id}&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${defCity}&lang=en&appid=${owm_id}&units=metric`;
   const res = await fetch(url);
   const data = await res.json();
   if (data.cod !== 200) {
