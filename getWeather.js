@@ -1,14 +1,13 @@
 import { ru, en } from './dict.js';
-
 const weatherIcon = document.querySelector('.weather-icon'),
     temperature = document.querySelector('.temperature'),
     weatherDescription = document.querySelector('.weather-description'),
     humidity = document.querySelector('.humidity'),
-    wind = document.querySelector('.wind');
-
+    wind = document.querySelector('.wind'),
+    id = "yourIdHere";
 export default async function getWeather(defCity) {
   let language = en;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${defCity}&lang=en&appid=351bef36095247499eb96265dfb607d2&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${defCity}&lang=en&appid=${id}&units=metric`;
   const res = await fetch(url);
   const data = await res.json();
   if (data.cod !== 200) {
