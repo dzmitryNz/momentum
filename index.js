@@ -53,10 +53,10 @@ function bgrChng() {
     let src = url + bckgrndArr[hours];
     img.src = src;
 
-    if (hours <= 23) { greeting.textContent = 'Good evening, '}
-    if (hours < 18) { greeting.textContent = 'Good day, '} 
-    if (hours < 12) { greeting.textContent = 'Good morning, '} 
-    if (hours < 6) { greeting.textContent = 'Good night, '}
+    if (hours <= 23) { greeting.textContent = language.greetings[2]}
+    if (hours < 18) { greeting.textContent = language.greetings[1]} 
+    if (hours < 12) { greeting.textContent = language.greetings[0]} 
+    if (hours < 6) { greeting.textContent = language.greetings[3]}
     img.onload = () => { body.style.backgroundImage = `url(${src})`};
 }
 
