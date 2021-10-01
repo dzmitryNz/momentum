@@ -9,6 +9,7 @@ export const en = {
   city: 'Belarus',
   humidity:'humidity',
   wind: 'wind speed',
+  quoteError: [" Sorry, Quote service is down ", "- code author"],
 }
 export const ru = { 
   weekdays: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 
@@ -21,4 +22,6 @@ export const ru = {
   city: 'Belarus',
   humidity:'humidity',
   wind: 'wind speed',
+  quoteError: [" Sorry, Quote service is down ", "- code author"],
+
 }

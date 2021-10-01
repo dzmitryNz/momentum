@@ -25,7 +25,7 @@ const time = document.querySelector('.time'),
         defName = language.name,
         defFocus = language.focus,
         defCity = language.city,
-        styleNew = 'color: lightgray; text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0',
+        // styleNew = 'color: lightgray; text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0',
         carusel = 0;
 
     function bckgrGrUpd() {
